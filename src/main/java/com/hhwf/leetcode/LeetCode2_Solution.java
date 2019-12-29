@@ -14,7 +14,7 @@ package com.hhwf.leetcode;
  * 原因：342 + 465 = 807
  * <p>
  */
-public class LeetCode2_AddTwoNumbers {
+public class LeetCode2_Solution {
 
     static class ListNode {
         int val;

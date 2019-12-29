@@ -22,7 +22,7 @@ package com.hhwf.leetcode;
  * <p>
  * Created by 32958 on 2019/12/28.
  */
-public class LeetCode4_FindMedianSortedArrays {
+public class LeetCode4_Solution {
 
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
