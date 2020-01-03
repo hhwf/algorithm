@@ -26,8 +26,20 @@ import java.util.Stack;
 public class LeetCode144_Solution {
 
 
-
-
+    /**
+     * 二叉树 前序遍历 -->中左右（递归方式）
+     *
+     * @param root
+     * @return
+     */
+    public List<Integer> preOrderTraversal_recursion(TreeNode root) {
+        List<Integer> list = new ArrayList<Integer>();
+        if (root == null) return list;
+        list.add(root.val);
+        list.addAll(preOrderTraversal_recursion(root.left));
+        list.addAll(preOrderTraversal_recursion(root.right));
+        return list;
+    }
 
     /**
      * 前序遍历，非递归
