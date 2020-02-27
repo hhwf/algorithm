@@ -1,6 +1,5 @@
 package com.hhwf.leetcode;
 
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.ArrayList;
 import java.util.List;
