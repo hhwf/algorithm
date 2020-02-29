@@ -8,11 +8,10 @@ package com.hhwf.leetcode;
 public class LeetCode5_Solution {
 
 
-    public String longestPalindrome(String s) {
+    public static String longestPalindrome(String s) {
         if (s == null || s.length() < 2) {
-            return "";
+            return s;
         }
-        String result = "";
         String str = preHandleString(s);
         // 处理后的字串长度
         int len = str.length();
@@ -27,12 +26,50 @@ public class LeetCode5_Solution {
         // 记录最长回文长度
         int longestHalf = 0;
 
+        for (int i = 0; i < str.length(); i++) {
+            //是否需要中心扩散
+            boolean calc = true;
 
+            //判断i是否大于rightSide
+            if (rightSide > i) {
 
+                //计算i和对应的左边值
+                int leftCenter = 2 * rightSideCenter - i;
 
+                halfLenArr[i] = halfLenArr[leftCenter];
 
+                if (i + halfLenArr[i] > rightSide) {
+                    halfLenArr[i] = rightSide - i;
+                }
+                if (i + halfLenArr[leftCenter] < rightSide) {
+                    calc = false;
+                }
+            }
 
-        return result;
+            //是否需要中心扩散
+            if (calc) {
+                while (i - 1 - halfLenArr[i] >= 0 && i + 1 + halfLenArr[i] < len) {
+                    if (str.charAt(i - 1 - halfLenArr[i]) == str.charAt(i + 1 + halfLenArr[i])) {
+                        halfLenArr[i]++;
+                    } else {
+                        break;
+                    }
+                }
+                rightSide = i + halfLenArr[i];
+                rightSideCenter = i;
+                if (halfLenArr[i] > longestHalf) {
+                    center = i;
+                    longestHalf = halfLenArr[i];
+                }
+            }
+        }
+
+        // 去掉之前添加的#
+        StringBuffer sb = new StringBuffer();
+        for(int i = center - longestHalf + 1; i <= center + longestHalf; i += 2) {
+            sb.append(str.charAt(i));
+        }
+        return sb.toString();
     }
 
     /**
@@ -40,7 +77,7 @@ public class LeetCode5_Solution {
      *
      * @return
      */
-    private String preHandleString(String s) {
+    private static String preHandleString(String s) {
         StringBuffer buffer = new StringBuffer("#");
         for (int i = 0; i < s.length(); i++) {
             buffer.append(s.charAt(i));
@@ -48,6 +85,10 @@ public class LeetCode5_Solution {
         }
         return buffer.toString();
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(longestPalindrome("bb"));
     }
 
 }
