@@ -41,7 +41,7 @@ public class LeetCode215_Solution {
             while (left < right && arr[right] >= pivot) {
                 right--;
             }
-                swap(arr, left, right);
+            swap(arr, left, right);
 
         }
         swap(arr, left, start);
