@@ -9,27 +9,34 @@ package com.hhwf.leetcode;
  */
 public class LeetCode64_Solution {
 
-    int[][] memo ;
-    int m ;
-    int n;
+
     public int minPathSum(int[][] grid) {
-        if(grid.length == 0){
+        if (grid.length == 0) {
             return 0;
         }
-        m = grid.length;
-        n = grid[0].length;
-        return dsf(grid,0,0);
-    }
-
-    public int dsf(int[][] grid,int i ,int j){
-        if ( i == m || j == n){
-            return Integer.MAX_VALUE;
+        int m = grid.length;
+        int n = grid[0].length;
+        int[][] memo = new int[m][n];
+        memo[0][0] = grid[0][0];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                if (i == 0) {
+                    memo[i][j] = memo[i][j - 1] + grid[i][j];
+                    continue;
+                }
+                if (j == 0) {
+                    memo[i][j] = memo[i - 1][j] + grid[i][j];
+                    continue;
+                }
+                memo[i][j] = Math.min(memo[i - 1][j], memo[i][j - 1]) + grid[i][j];
+            }
         }
-        return grid[i][j] + Math.min(dsf(grid,i+1,j),dsf(grid,i,j+1));
+
+        return memo[m - 1][n - 1];
     }
-
-
-
 
 
 }
